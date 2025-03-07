@@ -1,0 +1,97 @@
+*{
+    overflow-x: hidden;
+}
+body {
+    font-family: "Orbitron", sans-serif;
+    background: linear-gradient(45deg, rgba(0, 0, 255, 0.616), rgba(0, 204, 187, 0.651));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding-bottom: 30px;
+    overflow-x: hidden;
+}
+a{
+    text-decoration: none;
+    text-align: center;
+}
+.create{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10%;
+    font-size: 21px;
+    flex-wrap: wrap;
+}
+span{
+    color: #4CAF50;
+    text-decoration: underline;
+}
+.container {
+    background-color: rgba(255, 255, 255, 0.384);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 70%;
+    backdrop-filter: blur(10px);
+}
+.search{
+    display: flex;
+    justify-content: center;
+    gap: 5%;
+}
+.erresult{
+    color: red;
+}
+@keyframes move {
+    0%{
+        transform: rotate(25deg);
+    }
+    50%{
+        transform: rotate(-25deg);
+    }
+    100%{
+        transform: rotate(25deg);
+    }
+}
+h1 {
+    text-align: center;
+}
+i{
+    color: #45a049;
+}
+input {
+    width: 70%;
+    padding: 10px; 
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    outline: 2px solid #45a049;
+}
+
+button {
+    padding: 10px;
+    width: 15%;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+#results {
+    margin-top: 20px; 
+}
+.text{
+    text-align: center;
+}
+@media (max-width: 768px) {
+    .container{
+        width: 75%;
+    }
+}

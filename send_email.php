@@ -3,28 +3,17 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'vendor/autoload.php';
+require 'vendor/autoload.php'; // If you installed PHPMailer via Composer
 
-// Ensure the request is POST
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    die(json_encode(['status' => 'error', 'message' => 'Invalid request']));
-}
-
-// Collect and sanitize form data
+// Collect form data
 $name = htmlspecialchars($_POST['name']);
-$email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+$email = htmlspecialchars($_POST['email']);
 $message = htmlspecialchars($_POST['message']);
 
-// Validate email
+// Sanitize email
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    die(json_encode(['status' => 'error', 'message' => 'Invalid email address']));
+    die('Invalid email address');
 }
-
-// Email credentials (Use environment variables for security)
-$smtpHost = 'smtp.gmail.com';
-$smtpUsername = getenv('SMTP_USERNAME'); // Set in your server or hosting panel
-$smtpPassword = getenv('SMTP_PASSWORD'); // Set an app-specific password in Gmail
-$receiverEmail = 'ayfokruleul1@gmail.com'; // Your email
 
 // Prepare the email content
 $subject = "New Contact Form Submission from " . $name;
@@ -38,27 +27,31 @@ try {
 
     // SMTP configuration
     $mail->isSMTP();
-    $mail->Host = $smtpHost;
+    $mail->Host = 'smtp.gmail.com';  // Gmail SMTP server
     $mail->SMTPAuth = true;
-    $mail->Username = $smtpUsername;
-    $mail->Password = $smtpPassword;
+    $mail->Username = 'ayfokruleul1@gmail.com';  // Your Gmail address
+    $mail->Password = 'myr qza yir ytv qjjn';  // Use an app-specific password for Gmail (not your normal password)
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port = 587;
 
-    // Set email headers and body
-    $mail->setFrom($smtpUsername, 'Contact Form');
-    $mail->addAddress($receiverEmail);
+    // Set the email headers and body
+    $mail->setFrom('ayfokruleul1@gmail.com', 'Contact Form');
+    $mail->addAddress('ayfokruleul1@gmail.com');  // Your email
     $mail->isHTML(true);
     $mail->Subject = $subject;
     $mail->Body    = $body;
 
     // Send email
     if ($mail->send()) {
-        echo json_encode(['status' => 'success', 'message' => 'Message sent successfully']);
+        // If the email is sent successfully, redirect to the index page
+        header('Location: index.html');
+        exit(); // Make sure no other code is executed after redirection
     } else {
-        echo json_encode(['status' => 'error', 'message' => 'Message could not be sent.']);
+        // If email fails to send
+        echo 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo;
     }
 } catch (Exception $e) {
-    echo json_encode(['status' => 'error', 'message' => "Mailer Error: {$mail->ErrorInfo}"]);
+    // In case of an error
+    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }
 ?>

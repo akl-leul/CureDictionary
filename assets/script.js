@@ -1,75 +1,29 @@
-const apiKey = 'e042ee13-63a6-4f40-bc3f-ba0a83a8780b';
-const apiUrl = `https://www.dictionaryapi.com/api/v3/references/medical/json/`;
+function sendMessage(event) {
+    event.preventDefault(); // Prevent the default form submission
 
-function searchTerm() {
-    const searchInput = document.getElementById('search').value.trim();
-    const resultsDiv = document.getElementById('results');
-    
-    // Clear previous results and show loading message
-    resultsDiv.innerHTML = "<p>Loading...</p>";
-    
-    if (searchInput === "") { 
-        resultsDiv.innerHTML = " <i class='fa-solid fa-triangle-exclamation' style='color: red;'></i><p style='color: red; font-weight: 700;'> Please enter a medical term to search.</p>"; // Clear loading message
-        return;
-    }
+    // Gather input values
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
 
-    const url = `${apiUrl}${searchInput}?key=${apiKey}`;
-    
-    // Fetching the data from the API
-    fetch(url)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("Error fetching data from API");
-            }
-            return response.json();
-        })
-        .then(data => {
-            displayResults(data);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            document.getElementById('results').innerHTML = "<p>Something went wrong. Please try again later.</p>";
-        });
-    
-    // Clear the input after search
-    document.getElementById('search').value = '';
-}
-
-function displayResults(data) {
-    const resultsDiv = document.getElementById('results');
-    resultsDiv.innerHTML = ""; // Clear previous results
-
-    // Check if the response is empty or contains no data
-    if (data.length === 0) {
-        resultsDiv.innerHTML = "<p>No results found for this term.</p>";
-        return;
-    }
-
-    // Loop through the response data and display results
-    data.forEach(item => {
-        // The headword (term)
-        const term = item.hwi ? item.hwi.hw : "No term found";
-        
-        // The definitions of the term (shortdef is an array of definitions)
-        const definitions = item.shortdef || ["No definitions available"];
-
-        const termContainer = document.createElement('div');
-        termContainer.classList.add('result-item');
-
-        // Add the term (word) to the container
-        const termElement = document.createElement('h3');
-        termElement.textContent = term;
-        termContainer.appendChild(termElement);
-
-        // List the definitions
-        const definitionList = document.createElement('ul');
-        definitions.forEach(def => {
-            const definitionItem = document.createElement('li');
-            definitionItem.textContent = def;
-            definitionList.appendChild(definitionItem);
-        });
-
-        termContainer.appendChild(definitionList);
-        resultsDiv.appendChild(termContainer);
+    // Prepare the request
+    fetch('/send-message', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, email, message }),
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Failed to send message.');
+        }
+        return response.json();
+    })
+    .then(data => {
+        alert(data.success); // Show success message
+    })
+    .catch(error => {
+        alert(error.message); // Show error message
     });
 }

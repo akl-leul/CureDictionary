@@ -74,4 +74,4 @@ function displayResults(data) {
     });
 }
  
-       console.log("We see you're exploring! Thanks for your curiosity, but please remember to respect the content and privacy of our website. Happy browsing!")
+       console.log("We see👁👁 you're exploring! \n Thanks🙏 for your curiosity, but please remember to respect\n the content and privacy of our website. Happy browsing!😉")

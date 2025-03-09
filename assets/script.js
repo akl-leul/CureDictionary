@@ -74,25 +74,4 @@ function displayResults(data) {
     });
 }
  
-        // Function to detect if developer tools are open
-        function detectDevTools() {
-            const threshold = 160; // Threshold width of devtools
-            const devTools = /./;
-            devTools.toString = function() {
-                this.opened = true;
-            };
-            
-            try {
-                console.log(devTools);
-            } catch (e) {}
-
-            if (devTools.opened || window.outerWidth - window.innerWidth > threshold) {
-                alert("Access to developer tools is not allowed on this website. Please respect our privacy policy.");
-                // Optionally, redirect or block actions after detection
-                window.location.href = "https://www.cure-dictionary.vercel.app"; // Example: redirecting to home page
-            }
-        }
-
-        // Run the detection when the page is loaded
-        window.onload = detectDevTools;
-     
+       console.log("We see you're exploring! Thanks for your curiosity, but please remember to respect the content and privacy of our website. Happy browsing!")

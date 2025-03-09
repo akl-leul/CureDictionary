@@ -1,0 +1,43 @@
+{
+    "name": "CureDictionary",
+    "description": "CureDictionary is your go-to online tool for quick, clear medical definitions. Explore and understand medical terms with ease.",
+    "creator": "Leul Ayfokru",
+    "year": 2025,
+    "url": "https://cure-dictionary.vercel.app",
+    "social_links": {
+      "instagram": "https://instagram.com",
+      "telegram": "https://t.me",
+      "github": "https://github.com"
+    },
+    "features": [
+      "Quick and easy medical term search",
+      "Clear definitions for medical terms",
+      "User-friendly interface"
+    ],
+    "technology": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Vercel"
+    ],
+    "license": "© 2025 Leul Ayfokru",
+    "security": {
+      "data_encryption": "All user data is encrypted using modern encryption methods to ensure privacy and security.",
+      "user_data_protection": "User data is never shared with third parties without consent. Users have control over their data.",
+      "cookies": "The website uses cookies to enhance the user experience, such as saving preferences like dark mode and search history.",
+      "https": "The site uses HTTPS to ensure secure communication between the user's browser and the server."
+    },
+    "user_preferences": {
+      "dark_mode": {
+        "description": "Allows users to toggle between light and dark themes for a personalized viewing experience.",
+        "persistent": "User preference for dark mode is stored in localStorage for future visits."
+      },
+      "search_history": {
+        "description": "The website keeps a history of the user's search queries to allow quick access to previously searched terms.",
+        "persistent": "Search history is saved locally in the user's browser and is not shared or stored on the server.",
+        "user_control": "Users can clear their search history at any time by accessing settings.",
+        "history_data": []
+      }
+    }
+  }
+  

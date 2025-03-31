@@ -135,3 +135,8 @@ body.dark-mode input{
     border: 1px solid #ffc917;
     outline: 2px solid #ffc917;
 }
+iframe{
+    width: 80%;
+    height: fit-conntent;
+    display: flex;
+}
